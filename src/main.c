@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 18:13:03 by aschenk           #+#    #+#             */
-/*   Updated: 2024/12/04 18:42:13 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:20:11 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,13 @@ void	create_simple_scene(t_rt *rt)
     obj_data->cy.orientation.z = 0.0;
     obj_data->cy.radius = 1.0;  // Radius of the cylinder
     obj_data->cy.radius_sqrd = obj_data->cy.radius * obj_data->cy.radius;
-    obj_data->cy.height = 4.0;  // Height of the cylinder
+    obj_data->cy.height = 6.0;  // Height of the cylinder
     obj_data->cy.color.r = 255;
     obj_data->cy.color.g = 0;
     obj_data->cy.color.b = 0;  // Blue cylinder
 
     // Initialize the quadratic coefficients that are constant (not dependent on the ray)
+    obj_data->cy.ixd.cap_hit = 0;
     obj_data->cy.cap_top_center = vec3_add(obj_data->cy.center, vec3_mult(obj_data->cy.orientation, obj_data->cy.height / 2.0));
     obj_data->cy.cap_bottom_center = vec3_sub(obj_data->cy.center, vec3_mult(obj_data->cy.orientation, obj_data->cy.height / 2.0));
 
@@ -108,6 +109,8 @@ void	create_simple_scene(t_rt *rt)
     obj_data->cy.ixd.c = vec3_dot(obj_data->cy.ixd.oc, obj_data->cy.ixd.oc)
         - (obj_data->cy.ixd.axis_dot_oc * obj_data->cy.ixd.axis_dot_oc)
         - obj_data->cy.radius_sqrd;
+    obj_data->cy.ixd.ori_to_cap_top = vec3_sub(obj_data->cy.cap_top_center, rt->scene.cam.position);
+    obj_data->cy.ixd.ori_to_cap_bottom = vec3_sub(obj_data->cy.cap_bottom_center, rt->scene.cam.position);
 
     obj_node = ft_lstnew(obj_data);
     if (!obj_node)
@@ -201,6 +204,7 @@ void	create_simple_scene(t_rt *rt)
     obj_data->cy.color.b = 255;  // Light blue cylinder interior
 
     // Initialize the quadratic coefficients that are constant (not dependent on the ray)
+    obj_data->cy.ixd.cap_hit = 0;
     obj_data->cy.cap_top_center = vec3_add(obj_data->cy.center, vec3_mult(obj_data->cy.orientation, obj_data->cy.height / 2.0));
     obj_data->cy.cap_bottom_center = vec3_sub(obj_data->cy.center, vec3_mult(obj_data->cy.orientation, obj_data->cy.height / 2.0));
     obj_data->cy.cap_top_normal = obj_data->cy.orientation;
@@ -210,6 +214,8 @@ void	create_simple_scene(t_rt *rt)
     obj_data->cy.ixd.c = vec3_dot(obj_data->cy.ixd.oc, obj_data->cy.ixd.oc)
         - (obj_data->cy.ixd.axis_dot_oc * obj_data->cy.ixd.axis_dot_oc)
         - obj_data->cy.radius_sqrd;
+    obj_data->cy.ixd.ori_to_cap_top = vec3_sub(obj_data->cy.cap_top_center, rt->scene.cam.position);
+    obj_data->cy.ixd.ori_to_cap_bottom = vec3_sub(obj_data->cy.cap_bottom_center, rt->scene.cam.position);
 
     obj_node = ft_lstnew(obj_data);
     if (!obj_node)

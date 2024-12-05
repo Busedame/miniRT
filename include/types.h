@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:55:37 by aschenk           #+#    #+#             */
-/*   Updated: 2024/12/04 16:15:03 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:18:30 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,9 @@ typedef struct s_intersection_data
 	t_vec3	difference;
 	t_vec3	oc;
 	double	axis_dot_oc;
+	int		cap_hit;
+	t_vec3	ori_to_cap_top;
+	t_vec3	ori_to_cap_bottom;
 }	t_ixd;
 
 /**
@@ -167,13 +170,19 @@ typedef struct s_sphere
 
 /**
 Structure representing a cylinder in 3D space:
- - t_object `object_type`:	The object type (always `CYLINDER`).
- - t_vec3 `center`:			The center of the cylinder's base.
- - t_vec3 `orientation`:	A normalized vector representing the cylinder's axis.
- - double `radius`:			The radius of the cylinder.
- - double `height`:			The height of the cylinder.
- - t_color `color`:			The color of the cylinder.
- - t_ixd `ixd`:				Ray intersection data for the cylinder.
+ - t_object `object_type`:		The object type (always `CYLINDER`).
+ - t_vec3 `center`:				The center of the cylinder's base.
+ - t_vec3 `orientation`:		A normalized vector representing the cyl's axis.
+ - double `radius`:				The radius of the cylinder.
+ - double `height`:				The height of the cylinder.
+ - t_color `color`:				The color of the cylinder.
+ - t_vec3 `cap_top_center`:		The center of the top cap of the cylinder.
+ - t_vec3 `cap_bottom_center`:	The center of the bottom cap of the cylinder.
+ - t_vec3 `cap_top_normal`:		The normal vector of the top cap.
+ - t_vec3 `cap_bottom_normal`:	The normal vector of the bottom cap.
+ - int `cap_hit`:				Flag indicating if a cap was hit (`0`: no;
+ 								`1`: top; `2`: bottom).
+ - t_ixd `ixd`:					Ray intersection data for the cylinder.
 */
 typedef struct s_cylinder
 {
@@ -183,11 +192,11 @@ typedef struct s_cylinder
 	double		radius;
 	double		radius_sqrd;
 	double		height;
+	t_color		color;
 	t_vec3		cap_top_center;
 	t_vec3		cap_bottom_center;
 	t_vec3		cap_top_normal;
 	t_vec3		cap_bottom_normal;
-	t_color		color;
 	t_ixd		ixd;
 }	t_cylinder;
 

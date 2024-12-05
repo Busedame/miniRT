@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:47:07 by aschenk           #+#    #+#             */
-/*   Updated: 2024/12/04 18:42:25 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:22:54 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ void render_scene(t_rt *rt, int bg_color)
                             pixel_color = color_to_hex(obj_data->cy.color);
                         }
                     }
-                    if (ray_intersect_cap_top(ray_origin, ray_dir, &obj_data->cy, &t))
+                    if (obj_data->cy.ixd.cap_hit != 2 && ray_intersect_cap_top(ray_origin, ray_dir, &obj_data->cy, &t))
                     {
                         // If a hit occurs and it's closer than the previous hit, update the pixel color
                       //  printf("Top cap hit\n");
@@ -246,8 +246,10 @@ void render_scene(t_rt *rt, int bg_color)
                             closest_t = t;
                             pixel_color = color_to_hex(obj_data->cy.color);
                         }
+                        if (obj_data->cy.ixd.cap_hit == 0)
+                            obj_data->cy.ixd.cap_hit = 1;
                     }
-                    if (ray_intersect_cap_bottom(ray_origin, ray_dir, &obj_data->cy, &t))
+                    if (obj_data->cy.ixd.cap_hit != 1 && ray_intersect_cap_bottom(ray_origin, ray_dir, &obj_data->cy, &t))
                     {
                         // If a hit occurs and it's closer than the previous hit, update the pixel color
                        // printf("Bottom cap hit\n");
@@ -256,6 +258,8 @@ void render_scene(t_rt *rt, int bg_color)
                             closest_t = t;
                             pixel_color = color_to_hex(obj_data->cy.color);
                         }
+                        if (obj_data->cy.ixd.cap_hit == 0)
+                            obj_data->cy.ixd.cap_hit = 2;
                     }
                 }
 
