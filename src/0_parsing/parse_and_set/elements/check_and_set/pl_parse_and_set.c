@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pl_parse_and_set.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:50:27 by nholbroo          #+#    #+#             */
-/*   Updated: 2024/12/09 18:52:47 by aschenk          ###   ########.fr       */
+/*   Updated: 2025/01/07 18:09:33 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	set_plane(t_scene *scene)
 	obj_data = malloc(sizeof(t_obj_data));
 	if (!obj_data)
 		return (ERR_MEM_ALLOC);
-	obj_data->sp.object_type = PLANE;
+	obj_data->pl.object_type = PLANE;
 	if (set_coordinates(scene->pars.elem_data[1], \
 	&obj_data->pl.point_in_plane.x, &obj_data->pl.point_in_plane.y, \
 	&obj_data->pl.point_in_plane.z) != 0)

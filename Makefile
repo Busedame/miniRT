@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 16:20:40 by aschenk           #+#    #+#              #
-#    Updated: 2024/12/09 12:22:34 by aschenk          ###   ########.fr        #
+#    Updated: 2025/01/07 13:26:12 by nholbroo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,13 +34,13 @@ SRCS :=			$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/3_ray_cylinder_intersection.c \
 				$(SRCS_DIR)/4_ray_intersections.c \
 				$(SRCS_DIR)/5_ray_render.c \
+				$(SRCS_DIR)/6_ray_shadows.c \
 				$(SRCS_DIR)/utils/0_vector_utils_1.c \
 				$(SRCS_DIR)/utils/0_vector_utils_2.c \
 				$(SRCS_DIR)/utils/1_quadratic_utils.c \
 				$(SRCS_DIR)/utils/2_pixel_utils.c \
 				$(SRCS_DIR)/utils/3_cleanup.c \
 				$(SRCS_DIR)/utils/4_error_exit.c \
-				\
 				$(SRCS_DIR)/0_parsing/errors/errors_elements.c \
 				$(SRCS_DIR)/0_parsing/errors/errors_unique_elements.c \
 				$(SRCS_DIR)/0_parsing/errors/errors.c \
@@ -112,7 +112,7 @@ LIB_FLAGS :=	$(LIBFT_FLAGS) $(MLX_FLAGS)
 #####################
 
 CC :=			cc
-CFLAGS :=		-Wall -Wextra -Werror
+# CFLAGS :=		-Wall -Wextra -Werror
 CFLAGS +=		-I$(HDRS_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)		# Look for headers in these directories
 CFLAGS +=		-DWINDOW_H=$(WINDOW_H) -DWINDOW_W=$(WINDOW_W)	# Define window dimensions with pre-compilation constants
 

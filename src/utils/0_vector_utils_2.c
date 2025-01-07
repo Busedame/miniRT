@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_vector_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:35:34 by aschenk           #+#    #+#             */
-/*   Updated: 2024/12/09 01:07:30 by aschenk          ###   ########.fr       */
+/*   Updated: 2025/01/07 12:08:52 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,14 @@ t_vec3	vec3_norm(t_vec3 vec)
 	}
 	return (vec);
 }
+
+t_vec3	vec3_scale(t_vec3 v, double scalar)
+{
+	t_vec3	result;
+
+	result.x = v.x * scalar;
+	result.y = v.y * scalar;
+	result.z = v.z * scalar;
+	return (result);
+}
+

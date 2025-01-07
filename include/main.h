@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: nholbroo <nholbroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 18:13:07 by aschenk           #+#    #+#             */
-/*   Updated: 2024/12/09 20:09:02 by aschenk          ###   ########.fr       */
+/*   Updated: 2025/01/07 17:27:16 by nholbroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ int		find_closest_intersection(t_vec3 ray_dir, t_rt *rt);
 
 void	render_scene(t_rt *rt);
 
+// 6_ray_shadows.c
+
+t_vec3	calculate_ray_direction_to_light(t_rt *rt, t_vec3 ray_dir, double t, 
+			t_obj_data *obj_data);
+
 // utils/0_vector_utils_1.c
 
 t_vec3	vec3_add(t_vec3 v1, t_vec3 v2);
@@ -98,6 +103,7 @@ double	vec3_dot(t_vec3 v1, t_vec3 v2);
 
 t_vec3	vec3_new(double x, double y, double z);
 t_vec3	vec3_norm(t_vec3 vec);
+t_vec3	vec3_scale(t_vec3 v, double scalar);
 
 // utils/1_quadratic_utils.c
 
