@@ -1,32 +1,41 @@
 # miniRT
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/minirt_badge.png" alt="minirt_badge.png" />
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/minirt_badge.png" alt="minirt_badge.png" />
 </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Busedame/miniRT/refs/heads/main/.assets/miniRT_render.png" alt="miniRT_render.png" width="500"/>
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/miniRT_render.png" alt="miniRT_render.png" width="500"/>
     <br>
-    <span>miniRT render of  <a href="https://github.com/Busedame/miniRT/blob/main/scenes/cam_inside_sphere.rt">this scene</a>.</span>
+    <span>miniRT render of <a href="https://github.com/alx-sch/42_miniRT/blob/main/scenes/cam_inside_sphere.rt">this scene</a>.</span>
 </p>
 
 This project is a collaboration between:
 
-- **[Natalie](https://github.com/busedame)**: Responsible for the  `.rt` file parser.
-- **[Alex](https://github.com/alx-sch)**: Focused on MiniLibX (graphical library) integration, ray-object intersections, shading and shadowing.
-
+- **[Natalie](https://github.com/busedame)**: Responsible for the `.rt` file parser.
+- **[Alex](https://github.com/alx-sch)**: Focused on MiniLibX integration, ray-object intersections, shading & shadowing, and this README.
+  
 ---
 
 ## Overview
+<div id="top"></div>
 
-- **[How to Use](https://github.com/Busedame/miniRT?tab=readme-ov-file#how-to-use)**: Building miniRT and defining scene elements in `.rt` files.
-- **[Introduction to Ray Tracing](https://github.com/alx-sch/42_miniRT?tab=readme-ov-file#introduction-to-ray-tracing)**
-- **[Ray-Object Intersection](https://github.com/alx-sch/42_miniRT?tab=readme-ov-file#ray-object-intersection)**: Explains the mathematics behind detecting ray intersections with geometric objects, forming the basis for functions used in miniRT. 
-  - [Ray Equation](https://github.com/alx-sch/42_miniRT?tab=readme-ov-file#ray-equation)
-  - [Quadratic Equation](https://github.com/alx-sch/42_miniRT?tab=readme-ov-file#quadratic-equation)
-  - [Plane Intersection](https://github.com/alx-sch/42_miniRT?tab=readme-ov-file#plane-intersection)
-  - [Sphere Intersection](https://github.com/alx-sch/42_miniRT?tab=readme-ov-file#sphere-intersection)
-  - [Cylinder Intersection](https://github.com/alx-sch/42_miniRT?tab=readme-ov-file#cylinder-intersection)
+- **[How to Use](https://github.com/Busedame/miniRT/blob/main/README.md#overview)**: Building miniRT and defining scene elements in `.rt` files.
+- **[Introduction to Ray Tracing](https://github.com/Busedame/miniRT?tab=readme-ov-file#introduction-to-ray-tracing)**
+- **[Ray-Object Intersection](https://github.com/Busedame/miniRT?tab=readme-ov-file#ray-object-intersection)**: Mathematical definitions of object surfaces and functions for finding intersections.
+  - [Ray Equation](https://github.com/Busedame/miniRT?tab=readme-ov-file#ray-equation)
+  - [Quadratic Equation](https://github.com/Busedame/miniRT?tab=readme-ov-file#quadratic-equation)
+  - [Plane Intersection](https://github.com/Busedame/miniRT?tab=readme-ov-file#plane-intersection)
+  - [Sphere Intersection](https://github.com/Busedame/miniRT?tab=readme-ov-file#sphere-intersection)
+  - [Cylinder Intersection](https://github.com/Busedame/miniRT?tab=readme-ov-file#cylinder-intersection)
+  - [Finding Intersections with Objects](https://github.com/Busedame/miniRT/tree/main?tab=readme-ov-file#finding-intersections-with-objects)
+- **[Camera Ray](https://github.com/Busedame/miniRT/blob/main/README.md#the-camera-ray)**: Computing the direction of camera rays and transforming them into world space.
+- **[Shadow Ray](https://github.com/Busedame/miniRT/blob/main/README.md#the-shadow-ray)**: Check if the intersection point is in shadow by verifying if the light source is blocked.
+- **[Shading](https://github.com/Busedame/miniRT/blob/main/README.md#shading)**: Calculate the color at the intersection point based on its surface properties and its orientation relative to the light source.
+  - [Phong Reflection Model](https://github.com/Busedame/miniRT/blob/main/README.md#phong-reflection-model)
+  - [Diffuse Shading](https://github.com/Busedame/miniRT/blob/main/README.md#diffuse-shading)
+  - [Specular Reflection](https://github.com/Busedame/miniRT/blob/main/README.md#specular-reflection)
+  - [Combining Shading Components](https://github.com/Busedame/miniRT/blob/main/README.md#combining-shading-components)
 
 ---
 
@@ -34,7 +43,7 @@ This project is a collaboration between:
 
 1. Clone the repository and navigate into the project directory:    
    ```
-   git clone https://github.com/Busedame/miniRT miniRT && cd miniRT
+   git clone https://github.com/alx-sch/miniRT miniRT && cd miniRT
    ```
    
 2. Build the project:
@@ -47,22 +56,22 @@ This project is a collaboration between:
    	make bonus
    	```
    
-4. macOS Users: Install X11 via XQuartz if needed:
+3. macOS Users: Install X11 via XQuartz if needed:
    ```
    brew install xquartz
    ```
    If Homebrew is not installed, first run:
    ```
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install//install.sh)"
    ```
    After installation, restart your Mac or run:
    ```
    export DISPLAY=:0
    ```
-5. Run the program following the instructions in the output.
+4. Run the program following the instructions in the output.
 
 The `Makefile` automatically detects your OS and selects the correct MiniLibX library for compilation.
-[MiniLibX](https://github.com/42Paris/minilibx-linux) is a simple graphics library for creating windows and handling graphics/events.
+[MiniLibX](https://github.com/42Paris/minilibx-linux) is a simple graphics library for creating windows, handling pixel coloration, and managing events.
 
 ---
 
@@ -74,20 +83,20 @@ The `.rt` files define the elements and configurations for the scene to be rende
 #### Mandatory Elements
 
 - **Ambient Light**  
-  <img src="https://github.com/Busedame/miniRT/blob/main/.assets/rt_A.png" width="500" />  
+  <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/rt_A.png" width="500" />  
   * **Identifier**: `A`  
   * **Ambient lighting ratio** (brightness) [0.0, 1.0]: `0.2`  
   * **Color** in RGB [0, 255]: `255, 255, 255`
 
 - **Camera**  
-  <img src="https://github.com/Busedame/miniRT/blob/main/.assets/rt_C.png" width="500"/>  
+  <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/rt_C.png" width="500"/>  
   * **Identifier**: `C`  
   * **Position (XYZ coordinates)**: `-50.0, 0, 20`  
   * **Normalized orientation vector**: `0, 0, 1`  
   * **Field of view (FOV)** in degrees [0, 180]: `70`
 
 - **Light**  
-  <img src="https://github.com/Busedame/miniRT/blob/main/.assets/rt_L.png" width="500"/>  
+  <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/rt_L.png" width="500"/>  
   * **Identifier**: `L`  
   * **Position (XYZ coordinates)**: `-40.0, 50.0, 0.0`  
   * **Lighting ratio** (brightness) [0.0, 1.0]: `0.6`  
@@ -96,21 +105,21 @@ The `.rt` files define the elements and configurations for the scene to be rende
 #### Optional Elements
 
 - **Plane**  
-  <img src="https://github.com/Busedame/miniRT/blob/main/.assets/rt_pl.png" width="500"/>  
+  <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/rt_pl.png" width="500"/>  
   * **Identifier**: `pl`  
   * **Position (XYZ coordinates)** of a point on the plane: `0.0, 0.0, -10.0`  
   * **Normalized orientation vector**: `0.0, 1.0, 0.0`  
   * **Color** in RGB [0, 255]: `0, 0, 225`
 
 - **Sphere**  
-  <img src="https://github.com/Busedame/miniRT/blob/main/.assets/rt_sp.png" width="500"/>  
+  <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/rt_sp.png" width="500"/>  
   * **Identifier**: `sp`  
   * **Position (XYZ coordinates)** of the center: `0.0, 0.0, 20.6`  
   * **Diameter**: `12.6`  
   * **Color** in RGB [0, 255]: `10, 0, 255`
 
 - **Cylinder**  
-  <img src="https://github.com/Busedame/miniRT/blob/main/.assets/rt_cy.png" width="500"/>  
+  <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/rt_cy.png" width="500"/>  
   * **Identifier**: `cy`  
   * **Position (XYZ coordinates)** of the center: `50.0, 0.0, 20.6`  
   * **Normalized orientation vector** (axis): `0.0, 0.0, 1.0`  
@@ -118,7 +127,11 @@ The `.rt` files define the elements and configurations for the scene to be rende
   * **Height**: `21.42`  
   * **Color** in RGB [0, 255]: `10, 0, 255`
 
-To make it easier for the user, the orientation vectors do not need to be perfectly normalized. Vectors such as $(0.707, 0.707, 0)$ are accepted as well, instead of requiring exact values like $(1/\sqrt{2}, 1/\sqrt{2}, 0) = (0.707106\dots, 0.707106\dots, 0)$.
+To make it easier for the user, the orientation vectors do not need to be perfectly normalized. Vectors such as $(0.707, 0.707, 0)$ are accepted as well, instead of requiring exact values like $(\sqrt{1/2}, \sqrt{1/2}, 0) = (0.707106\dots, 0.707106\dots, 0)$.
+
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
 
 ---
 ## Introduction to Ray Tracing
@@ -130,329 +143,15 @@ This method was popular in early static computer graphics —think of those icon
 This project, **miniRT**, aims to build a simple yet functional ray tracer from scratch in C, exploring the fundamentals of vector calculations and rendering.
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/ray_tracing_process.png" alt="ray_tracing_process.png" width="400"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/ray_tracing_process.png" alt="ray_tracing_process.png" width="400"/>
     <br>
     <span><strong>Ray-tracing process:</strong> The ray goes from the camera through a pixel of the window and is tested for intersection with the objects. When a ray hits an object, the ray tracer works out how much light is reflected back along the ray to determine the pixel's color.<sup><a href="#footnote1">[1]</a></sup></span>
 </p>
+
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
 			     
----
-
-## Introduction to basic mathematical terms and concepts
-
-In this part, we will have a look at some important mathematical terms and concepts, needed to build the equations and calculations for miniRT.  
-This part is written while studying the book "The Ray Tracer Challenge" by Jamis Buck (2019), and it is a result of reading and taking notes from this book.
-
-### Epsilon
-
-Since we are dealing with floating point numbers (e.g. 1.5512) in our calculations, we need to account for floating point precision errors. This means that two numbers that should be seen as equivalent, can end up being shown as different. This happens because of round off errors happening on a binary level.  
-To take this into consideration, we can use an `EPSILON` value. This is a very small value (e.g. 1-e6 or 0.000001).
-```bash
-	Instead of this:
-	if (a < 0)
-
-	Do this:
-	if (a < EPSILON)
-```
-
-### Vectors
-
-In a 3D space (as in the real world or in our miniRT), we can use a coordinate system to determine a *point in space*. This essentially means *where* something is located in a certain space.
-
-<p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/coordinate_system.png" alt="coordinate_system.png" width="400"/>
-    <br>
-    <span>A coordinate system with x,y,z.</span>
-</p>
-
-`x` How far to the right or the left.  
-`y` How far up or down.  
-`z` How close or far away from the viewer.  
-
-A **vector** works similar, and can be seen as a line that's giving us information about two things:
-- The direction it is pointing to.
-- How long it is.
-
-A vector gets determined by its x,y,z coordinates, as in a 3D coordinate system.
-Since a vector needs two points to be defined, we can look at it like this:
-- `start point` is (0,0,0)
-- `vector point` is (2,4,1)
-- To visualize how this works: Draw one point at 0,0,0 and draw a line to point 2,4,1. The direction of the vector will be determined by in which direction this line is going, starting from start point.
-
-However, since these coordinates are also defining a *point* in a coordinate system, we need a way to distinguish a point from a vector. We can therefore add another variable, let's call it *w*. Note that this is only used in the first few examples, as it is not something we have implemented in the project. It is mostly used as a more visual example of how points and vectors can be distinguished.  
-- `w` If it is a point (set to 1), if it is a vector (set to 0).  
-
-##
-
-**Adding a vector direction to a point➕**
-
-Let's say we have a point a (2,5,-1,1) and a vector v(3,4,1,0). We want to figure out where you would be if you followed the direction of vector v, starting from point a. This essentially means that point a and point b together creates a vector that goes in the same direction as vector v. This follows the same logic as mentioned before, when drawing a vector.  
-**We add the values of point a and vector together:**  
-- a.x (2) + v.x (3) = b.x (5)
-- a.y (5) + v.y (4) = b.y (9)
-- a.z (-1) + v.z (1) = b.z (0)
-- a.w (1) + v.w (0) = b.w (1)
-
-And we are left with a new point b (5,9,0,1). Point (b) is in the direction of vector (v) from point (a) -- not from start point 0,0,0.
-
-Code example:
-```bash
-t_vec3	vec3_add(t_vec3 v1, t_vec3 v2)
-{
-	t_vec3	result;
-
-	result.x = v1.x + v2.x;
-	result.y = v1.y + v2.y;
-	result.z = v1.z + v2.z;
-	return (result);
-}
-```
-
-##
-
-**Finding a vector direction between two points➖**
-
-Let's say we have a point a (2,5,-1,1) and a point b (3,4,1,1). Since we are talking about miniRT, let's give them the following roles:
-- `point a` = Light source coordinates.
-- `point b` = Object coordinates.
-
-We want to find a vector that gives us the direction from object to light source.  
-The direction of a vector between two points can be seen as this formula:
-```bash
-	direction (x,y,z,0) = dest (x,y,z,1) - origin (x,y,z,1)
-```
-**We subtract the values of point b from point a == light_coords - object_coords == a - b.**  
-- a.x (2) - b.x (3) = v.x (-1)
-- a.y (5) - b.y (4) = v.y (1)
-- a.z (-1) - b.z (1) = v.z (-2)
-- a.w (1) - b.w (1) = v.w (0)
-
-In order to make the vector point from the object to the light source, subtract the object’s coordinates from the light source’s coordinates. This way, the vector will point in the direction from the object to the light source.
-
-💡 Note: If you picture every vector to start from coordinates (0,0,0). If a vector has the coordinates (2,4,2) - it shows that everytime the vector moves -- move 2 positions to the right, 4 positions up and 2 positions away from you. With this example: Draw a line between point1 (0,0,0) and point2 (2,4,2).  
-**So:** In the above example of having two points (a and b) and creating a vector, the vector is going to tell us "how to move" from one point to ultimately reach the other point.
-
-Code example:
-```bash
-t_vec3	vec3_sub(t_vec3 v1, t_vec3 v2)
-{
-	t_vec3	result;
-
-	result.x = v1.x - v2.x;
-	result.y = v1.y - v2.y;
-	result.z = v1.z - v2.z;
-	return (result);
-}
-```
-
-##
-
-**Finding the opposite direction of a vector🔃**
-
-Say we have a vector pointing from a surface to the light source. What can we do to reverse the direction -- so make it point *from* the light source *to* the surface?  
-**We introduce a zero vector (0,0,0,0) subtract vector v (2,4,1,0) from vector zero, and get new vector:**  
-- zv.x (0) - v.x (2) = nv.x (-2)
-- zv.y (0) - v.y (4) = nv.y (-4)
-- zv.z (0) - v.z (1) = nv.z (-1)
-- zv.w (0) - v.w (0) = nv.w (0)
-
-Here we are essentially just reversing the *sign* of the different coordinates of vector v. Another (and much more straightforward) way to do this, would be just reversing the sign of vector v. **So + becomes -, and - becomes +**.
-
-##
-
-**Finding the distance from start to a point🏃‍♀️**
-
-If you have a vector, and you want to find a point that is 3.5 times further in the vector direction, e.g. to see where a ray intersects a sphere. 3.5 would be the *scalar* value. Multiplying with this value, *scales* the vector - meaning that each component (x,y,z,w) gets multiplied with the same value (3.5).  
-**We have a vector v (2,-1,3) and scale it by 3.5:**  
-- v.x (2) * 3.5 = 7
-- v.y (-1) * 3.5 = -3.5
-- v.z (3) * 3.5 = 10.5
-
-The result after scaling gives us a point (7,-3.5,10.5). This point will be 3.5 times further away from our original point, moved in the direction of vector v.
-
-Code example:
-```bash
-t_vec3	vec3_mult(t_vec3 vec, double scalar)
-{
-	t_vec3	result;
-
-	result.x = vec.x * scalar;
-	result.y = vec.y * scalar;
-	result.z = vec.z * scalar;
-	return (result);
-}
-```
-
-##
-
-**Finding the length of a vector📏**
-
-Until now, we have mainly looked at different ways to figure out vector directions. Now, what about the length, or the *magnitude* of a vector? This means how far you would travel in a straight line, if you were to walk from one end of the vector to the other.  
-
-Do you remember Pythagoras' theorem?  
-
-$$
-a² + b² = c²
-$$
-
-Pythagoras' theorem says this: "In a right-angled triangle, the square of the hypotenuse side is equal to the sum of squares of the other two sides“. I found it a bit hard to figure out exactly why this applies to finding the length of a vector, but I will show two very poorly made drawings. I have tried to show exactly why this makes sense.
-
-<p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/Pythagoras_1.png" alt="Pythagoras_1.png" width="400"/>
-    <br>
-    <span>Pythagoras' in a 2D coordinate system. c or vector 1 is the unknown side/hypotenuse, and will tell us the length of the vector.</span>
-</p>
-
-<p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/Pythagoras_2.png" alt="Pythagoras_2.png" width="400"/>
-    <br>
-    <span>Pythagoras' in a 3D coordinate system. d is the unkown side/hypotenuse, and will tell us the length of the vector.</span>
-</p>
-
-We have a vector v (1, 2, 3). The equation would look like this -> 1² + 2² + 3² = x²:
-1. v.x (1) = 1 * 1 = 1
-2. v.y (2) = 2 * 2 = 4
-3. v.z (3) = 3 * 3 = 9
-4. 1 + 4 + 9 = 14
-5. Since 14 is equivalent to x², and we want to find x, we need to take the *square root* of 14.
-6. The magnitude of vector v is 3.741657387.
-
-In our miniRT project, we don't want to operate with vectors with a different magnitude than 1. These vectors are called *unit vectors*. If we don't work with unit vectors/*normalized* vectors - the calculations would be scaled differently for every ray casted. By using normalized vectors, all calculations will be done relative to a common scale (the unit vector which is 1).
-
-Code example:
-```bash
-double	vec3_length(t_vec3 v)
-{
-	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
-}
-```
-
-##
-
-**Normalization⚖️**
-
-Normalizing a vector keeps the correct direction, but reduces or increases its magnitude to 1. In miniRT we don't accept orientation vectors that are not normalized, but whenever a new vector is created - we make sure to normalize it each time.  
-
-**You normalize a vector by dividing each of its components by its magnitude:**
-1. In our previous example we had a vector v (1,2,3). After using Pythagoras' theorem (multiplying each value with itself one time, adding them together, then square root of the result), we figured out its magnitude was 3.741657387.
-2. We divide each of its components by the magnitude (1 / 3.741657387, 2 / 3.741657387, 3 / 3.741657387).
-3. Vector v now has the following coordinates (0.267261242, 0.534522484, 0.801783726).
-
-**Checking if the vector is normalized:**
-1. We use Pythagoras' on the new values of vector v.
-3. 0.267261242² + 0.534522484² + 0.801783726² = 1²
-4. 0.071428571 + 0.285714286 + 0.642857143 = 1
-5. Since the square root of 1 = 1, the vector v is now normalized.
-
-Code example:
-```bash
-t_vec3	vec3_norm(t_vec3 vec)
-{
-	double	length;
-	double	inv_length;
-
-	length = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	if (length > -6)
-	{
-		inv_length = 1.0 / length;
-		vec.x *= inv_length;
-		vec.y *= inv_length;
-		vec.z *= inv_length;
-	}
-	return (vec);
-}
-```
-
-##
-
-**Dot product📍➡️📍**
-
-The dot product is also called a scalar product or inner product. It tells us *how aligned* two vectors are. This essentially means how big the angle between them are. Well, why not only use angles then, like 90°, 180°, etc.? That would be more computationally expensive, as it would require trigonometric functions. The dot product is a simple arithmetic operation, and serves the same purpose.  
-
-So how is it calculated? It takes two vectors and returns a *scalar value*. The dot product is computed as the *sum of the products of the corresponding components of each vector*.  
-It essentially looks like this (assuming both vectors are normalized):
-```bash
-	float	dot(vec a, vec b)
-	{
-		return (a.x * b.x + a.y * b.y + a.z * b.z);
-	}
-```
-It is a bit hard to understand what actually happens, but think about this:
-- If the *dot product is 0*, the vectors are perpendicular (90°).
-- If the *dot product is 1*, the vectors are *identical* (0°).
-- If the *dot product is -1*, the vectors are pointing in *opposite* directions (180°).
-- The *smaller* the dot product, the *larger* the angle between the two vectors.
-- The *greater* the dot product, the *smaller* the angle between the two vectors.
-
-💡 Note: Since we only operate with unit vectors (length of 1), the dot product is equivalent to the *cosine of the angle* between them. This also means that the *maximum* dot product is 1, and the *minimum* dot product is -1.  
-If the vectors were NOT normalized, we would have to also take the cosine of the result to keep it between the range of -1 and 1.  
-
-**Let's do some examples with two normalized vectors:**
-
-With vectors v1 (0,0,1) and v2 (1,0,0):
-- We do our dot product calculation, which leaves us with the result 0.
-- Since the result is 0, we know that these vectors are perpendicular to each other.
-
-With vectors v1 (1,0,0) and v2 (1,0,0)
-- We do our dot product calculation, which leaves us with the result 1.
-- Since the result is 1, we know that these vectors are identical.
-
-With vectors v1 (-1,0,0) and v2 (1,0,0)
-- We do our dot product calculation, which leaves us with the result -1.
-- Since the result is -1, we know that these vectors are pointing in opposite directions.
-
-Anything in between -1 and 1 will indicate the angle between the two vectors. The closer the dot product is to 1, the smaller the angle is (since 1 would make them identical). The closer the dot product is to -1, the greater the angle is (since -1 would make them opposite).
-
-**Let's do an example with two not-normalized vectors, v1 (2,1,4) and v2 (3,4,2):**  
-
-1. Find the *dot product* of v1 and v2, which is 18.
-2. Find the *magnitude* of *each vector*. v1 is 4.582575695 and v2 is 5.385164807.
-3. *Multiply* the two magnitudes 4.582575695 and 5.385164807. We get 24.677925359.
-4. *Divide* the dot product by the product (multiplication) of the two magnitudes. 18 / 24.677925359.
-5. We get 0.729396809.
-
-Our result "0.729396809" indicates that the angle is less than 90 degrees, but greater than 0 degrees.  
-Converted to degrees, the angle between v1 and v2 is approximately 43.16°.
-
-##
-
-**Cross product✖️**
-
-The cross product is similar to the dot product, but instead of returning a scalar, it *returns another vector*. This new vector will be *perpendicular* to both the original vectors. This becomes very handy when setting up the *camera coordinate system*. This is further explained further down in this README, about *camera orientation vectors*.  
-
-To give a short introduction, finding the cross product makes sure that **no matter the camera orientation vector, right and up will always be relative to the orientation**.  
-
-It's maybe intuitive to think that right (x) would always mean (1,0,0) and up (y) would always mean (0,1,0). However this is only true if z is (0,0,1). If the camera orientation vector is facing diagonally upwards (1,1,1) -- these calculations would be wrong. That's why we need the cross product, to correctly determine what is left, right, up and down -- and that it stays perpendicular to wherever the camera is facing.  
-
-So:
-- If the camera was always fixed, Right = (1,0,0) and Up = (0,1,0) would work.
-- But since the camera can rotate and look in any direction, we use the cross product to ensure Right and Up stay properly aligned.
-- Note that the order of which the calculation happens is very important!
-
-**The calculation of the cross product looks like this:**
-- v3.x = v1.y * v2.z - v1.z * v2.y
-- v3.y = v1.z * v2.x - v1.x * v2.z
-- v3.z = v1.x * v2.y - v1.y * v2.x
-
-The calculation takes two vectors, and returns a new vector that is perpendicular to both original vectors.
-
-Code example:
-```bash
-t_vec3	vec3_cross(t_vec3 v1, t_vec3 v2)
-{
-	t_vec3	result;
-
-	result.x = (v1.y * v2.z) - (v1.z * v2.y);
-	result.y = (v1.z * v2.x) - (v1.x * v2.z);
-	result.z = (v1.x * v2.y) - (v1.y * v2.x);
-	return (result);
-}
-```
-💡 Note: When calculating the "camera right" for camera orientation (the right of the camera's view) - the standard way to do it looks like this:  
-`vec3_norm(vec3_cross(vec3_new(0, 1, 0), scene->cam.dir))`.  
-However, there is an edge case happening in the case of the camera orientation vector being `0,1,0` or `0,-1,0` (camera looking up or down). The standard calculation would potentially result in a cross product calculation of *two identical vectors*, making them parallel or undefined. This leads to all rays being identical instead of spreading out.  
-To handle this edge case, we need a different calculation:  
-`(vec3_norm(vec3_cross(scene->cam.dir, vec3_new(1, 0, 0)))`.
-
 ---
 
 ## Ray-Object Intersection
@@ -476,6 +175,10 @@ Where:
 
 - **$t$:**  A scalar value indicating the distance along the ray. It scales the direction vector, determining how far along the ray the point $P(t)$ is. When the direction vector is normalized, the value of $(t)$ directly represents the magnitude of the distance from the ray’s origin.
 
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
+
 ---
 
 ### Plane Intersection
@@ -492,7 +195,7 @@ Where:
 - **$\vec{n} $:** The normal vector of the plane, which is perpendicular to the surface.
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/plane_definition.png" alt="plane_definition.png" width="200"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/plane_definition.png" alt="plane_definition.png" width="200"/>
     <br>
     <span>A plane is defined by a point <i>a</i>, which determines its location, and a normal <i>n</i>, which defines its orientation. The point <i>p</i> is any point on the plane, such as the intersection of a ray with the plane.<sup><a href="#footnote1">[1]</a></sup></span>
 </p>
@@ -520,12 +223,12 @@ $$
 - If the denominator $(\vec{d} \cdot \vec{n} )$ is zero  (*t* is undefined or infinite), it means the ray is **parallel** to the plane and does not intersect it.
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/ray_plane_intersection.png" alt="ray_plane_intersection.png" width="400"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/ray_plane_intersection.png" alt="ray_plane_intersection.png" width="400"/>
     <br>
     <span>The plane becomes visible if the ray intersects it in front of the camera's origin (t > 0).<sup><a href="#footnote1">[1]</a></sup></span>
 </p>
 
-In the function, we first check if the ray is not parallel to the plane (*t* exists or is defined). If the ray is not parallel, we then check if the intersection happens in front of the camera (*t* is positive). The function returns successfully only if the intersection occurs in front of the camera.
+In the function, we first check if the ray is not parallel to the plane (*t* exists or is defined). If the ray is not parallel, we then check if the intersection happens in front of the camera (*t* is positive).
 
 ```C
 /**
@@ -572,6 +275,11 @@ int	ray_intersect_plane(t_vec3 ray_origin, t_vec3 ray_dir, t_plane *plane, doubl
 	return (0);	// No valid intersection is found
 }
 ```
+
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
+
 ---
 
 ### Quadratic Equation
@@ -594,7 +302,9 @@ $$
 
 For a detailed derivation of the quadratic formula, please refer to [ChiliMath Quadratic Formula Derivation](https://www.chilimath.com/lessons/intermediate-algebra/derive-quadratic-formula/).
 
-### Quadratic Intersections in Ray Tracing
+---
+
+#### Quadratic Intersections in Ray Tracing
 
 In context of the miniRT project, calculating intersections with objects like **spheres** or **cylinders** involves solving a quadratic equation of the form
 
@@ -611,6 +321,8 @@ $$
 Where:
 - **$t$:** The unknown variable representing the **distance from the ray's origin** to the intersection points.
 - **$a$, $b$, $c$:** Coefficients determined by the ray and object properties (e.g., direction vectors, centers, and radius).
+
+---
 
 #### Role of the Discriminant (Δ):    
 
@@ -654,6 +366,7 @@ double	calculate_discriminant(double a, double b, double c)
 	return (discriminant);	// Return the computed discriminant
 }
 ```
+---
 
 #### Special case: Camera Inside the Object
 
@@ -667,6 +380,10 @@ t_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
 $$
 
 If ($t_1 < 0$) and ($t_2 >0$), the ray starts **within** the object and the valid intersection point is ($t_2$) (the exit point), which is **in front of the camera**. ($t_1$) is negative, corresponding to an intersection **behind the camera**, making it invalid.
+
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
 
 ---
 
@@ -686,7 +403,7 @@ Where:
 - **$r$:** The radius of the sphere.
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/sphere_definition.png" alt="sphere_definition.png" width="200"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/sphere_definition.png" alt="sphere_definition.png" width="200"/>
     <br>
     <span> A sphere is defined by its center <i>c</i> and radius <i>r</i>, which determine its size and position. The point <i>p</i> represents any point on the sphere's surface (potential intersection point).<sup><a href="#footnote1">[1]</a></sup></span>
 </p>
@@ -715,7 +432,7 @@ $$
 t^2 +  2t \left( \vec{oc} \cdot \vec{d} \right) + \left( \vec{oc} \cdot \vec{oc} \right) - r^2 = 0
 $$
 
-As explained [above](https://github.com/Busedame/miniRT/blob/main/README.md#quadratic-intersections-in-ray-tracing), this solves into:
+As explained [above](https://github.com/alx-sch/42_miniRT/blob/main/README.md#quadratic-intersections-in-ray-tracing), this solves into:
 
 $$
 t = \frac{-b \pm \sqrt{b^2 - 4c}}{2}
@@ -728,13 +445,13 @@ Where the coefficients are:
 - **$c = (\vec{oc} \cdot \vec{oc}) - r^2$**
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/ray_sphere_discriminante.png" alt="ray_sphere_discriminante.png" width="400"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/ray_sphere_discriminante.png" alt="ray_sphere_discriminante.png" width="400"/>
     <br>
     <span>The discriminant indicates whether the ray intersects the sphere at zero, one, or two points.<sup><a href="#footnote1">[1]</a></sup></span>
 </p>
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/ray_sphere_intersection_distance.png" alt="ray_sphere_intersection_distance.png" width="400"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/ray_sphere_intersection_distance.png" alt="ray_sphere_intersection_distance.png" width="400"/>
     <br>
     <span>Rays do not register an intersection at their origin; the intersection requires t > 0.<sup><a href="#footnote1">[1]</a></sup></span>
 </p>
@@ -796,6 +513,9 @@ int	ray_intersect_sphere(t_vec3 ray_origin, t_vec3 ray_dir, t_sphere *sphere, do
 	return (0);	// No valid intersection found
 }
 ```
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
 
 ---
 
@@ -813,9 +533,9 @@ $$
 $$
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/cylinder_definition.png" alt="cylinder_definition.png" width="200"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/cylinder_definition.png" alt="cylinder_definition.png" width="200"/>
     <br>
-    <span>A cylinder is defined by a point on its axis and a vector representing its direction (e.g., <i>(0,0,0)</i> as the point and <i>(0,1,0)</i> as the orientation vector along the y-axis in the figure above in the figure above), a radius, and a height given by $\Vert y_1 - y_0 \Vert$. The point  <i>p</i> can be any point on the cylinder's mantle.<sup><a href="#footnote1">[1]</a></sup></span>
+    <span>A cylinder is defined by a point on its axis and a vector representing its direction (e.g., <i>(0,0,0)</i> as the point and <i>(0,1,0)</i> as the orientation vector along the y-axis in the figure above), a radius, and a height given by $\Vert y_1 - y_0 \Vert$. The point <i>p</i> can be any point on the cylinder's surface.<sup><a href="#footnote1">[1]</a></sup></span>
 </p>
 
 Now define the vector from the reference point ($C$) (on the axis) to the point ($P$) (on the surface), which captures the spatial relationship between the axis and the surface point:
@@ -834,7 +554,7 @@ $$
 \Vert \vec{p} \Vert^2 - (\vec{p} \cdot \vec{u})^2 = r^2
 $$
 
-The parametric form of the [ray equation](https://github.com/Busedame/miniRT/blob/main/README.md#ray-equation) is:
+The parametric form of the [ray equation](https://github.com/alx-sch/42_miniRT/blob/main/README.md#ray-equation) is:
 
 $$
 P_x(t) = O_x + tD_x
@@ -868,12 +588,6 @@ Expanding the two squared terms gives:
 
 $$
 \left( \vec{oc} \cdot \vec{oc} + 2t(\vec{oc} \cdot \vec{d}) + t^2(\vec{d} \cdot \vec{d})\right) - \left( (\text{axis-dot-oc})^2 + 2t(\text{axis-dot-oc} \times \text{axis-dot-ray}) + t^2(\text{axis-dot-ray})^2 \right)
-$$
-
-Expanding the squared terms of the **second part** of the equation gives:
-
-$$
-\text{axis-dot-oc}^2 + 2t(\text{axis-dot-oc} \times \text{axis-dot-ray}) + t^2(\text{axis-dot-ray})^2
 $$
 
 Grouping all this into a quadratic form ($at^2+bt+c=0$) gives the following coefficients:
@@ -915,7 +629,6 @@ int	ray_intersect_cylinder(t_vec3 ray_origin, t_vec3 ray_dir, t_cylinder *cylind
 	double	c;
 	double	discriminant;
 	
-
 	// Compute the vector from ray origin to the cylinder center
 	oc = vec3_sub(ray_origin, cylinder->center);
 
@@ -953,7 +666,7 @@ int	ray_intersect_cylinder(t_vec3 ray_origin, t_vec3 ray_dir, t_cylinder *cylind
 Please note that this function calculates the intersection of a ray with an infinite cylinder, not yet considering the cylinder's height and end caps. So far, it only detects intersections with the cylinder's lateral surface:
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/scene_no_height.png" alt="scene_no_height.png" width="500"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/scene_no_height.png" alt="scene_no_height.png" width="500"/>
     <br>
     <span>The blue and red objects are both infinite cylinders.</span>
 </p>
@@ -992,7 +705,7 @@ $$
 $$
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/ray_cyl_height.png" alt="ray_cyl_height.png" width="350"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/ray_cyl_height.png" alt="ray_cyl_height.png" width="350"/>
 </p>
 
 ```C
@@ -1054,7 +767,7 @@ int	ray_intersect_cylinder(t_vec3 ray_origin, t_vec3 ray_dir, t_cylinder *cylind
 }
 ```
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/scene_no_caps.png" alt="scene_no_caps.png" width="500"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/scene_no_caps.png" alt="scene_no_caps.png" width="500"/>
     <br>
     <span>The blue and red cylinders are finite in height but have no caps. Looking through the blue cylinder.</span>
 </p>
@@ -1083,9 +796,13 @@ To account for the cylinder's end caps, the goal is to check if a ray intersects
 
    Simplify: $\left(\vec{oc}_\text{cap} \cdot \vec{u} + t(\vec{d} \cdot \vec{u}) \right) = 0$
 
-   Solve for $t = - \frac{\vec{oc}_\text{cap} \cdot \vec{u}}{\vec{d} \cdot \vec{u}}$
+   Solve for
 
-4. **Check the intersection point against the cap's radius:**    
+$$
+   t = - \frac{\vec{oc}_\text{cap} \cdot \vec{u}}{\vec{d} \cdot \vec{u}}
+$$
+
+5. **Check the intersection point against the cap's radius:**    
    Once ($t$) is computed, the intersection point $(P(t))$ can be calculated using the ray equation.
    The intersection point lies within the cap if the squared length of this vector is less than or equal to the squared radius of the cap:
    $\Vert P(t) - C_{\text{cap}}  \Vert^2 \leq r^2$
@@ -1133,7 +850,7 @@ int	ray_intersect_cap(t_vec3 ray_origin, t_vec3 ray_dir, t_cylinder *cyl, double
 	denominator = vec3_dot(ray_dir, cap_normal);
 
 	// If the denominator is near zero, the ray is parallel to the cap and cannot intersect
-	if (fabs(denominator) < -3)
+	if (fabs(denominator) < 1e-3)
 		return (0);
 
 	// Calculate the distance t_cap to the intersection point on the cap plane
@@ -1160,22 +877,87 @@ int	ray_intersect_cap(t_vec3 ray_origin, t_vec3 ray_dir, t_cylinder *cyl, double
 ```
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/scene_complete_cyl.png" alt="scene_complete_cyl.png" width="500"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/scene_complete_cyl.png" alt="scene_complete_cyl.png" width="500"/>
     <br>
     <span>Looking at the end cap of the closed blue cylinder.</span>
 </p>
 
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
+
 ---
 
-## Perspective Viewing
+### Finding Intersections with Objects
+
+The function `find_intersection` finds the closest intersection between a camera ray and objects in the scene. Here's how it works:    
+
+```C
+
+/**
+Updates the intersection struct with the closest intersection data found in the
+scene (object and distance) for a given camera ray.
+ @param ray_ori 	The origin of the ray.
+ @param ray_dir		The normalized direction vector of the ray.
+ @param obj		Pointer to the object data.
+ @param ix		Pointer to the 'intersection data' struct to update.
+*/
+void	find_intersection(t_vec3 ray_ori, t_vec3 ray_dir, t_rt *rt, t_ix *ix)
+{
+	t_list	*current_obj;
+	t_obj	*obj;
+
+	// Initialize intersection data
+	current_obj = rt->scene.objs;
+	ix->hit_obj = NULL;
+	ix->t_hit = INFINITY;
+
+	// Loop through all objects in the scene
+	while (current_obj)
+	{
+		obj = (t_obj *)current_obj->content;
+
+		// Call the appropriate intersection function based on object type
+		if (obj->object_type == PLANE)
+			plane_ix(ray_ori, ray_dir, obj, ix);
+		else if (obj->object_type == SPHERE)
+			sphere_ix(ray_ori, ray_dir, obj, ix);
+		else if (obj->object_type == CYLINDER)
+			cyl_ix(ray_ori, ray_dir, obj, ix);
+		current_obj = current_obj->next;
+	}
+
+	// Compute the hit point if an intersection was found
+	if (ix->hit_obj != NULL)
+		ix->hit_point = vec3_add(ray_ori, vec3_mult(ray_dir, ix->t_hit));
+}
+```
+
+For each object, the appropriate intersection function (`plane_ix`, `sphere_ix`, `cyl_ix`, see in [find_intersection.c](https://github.com/alx-sch/42_miniRT/blob/main/src/4_find_intersection.c])) is called based on the object's type. These functions check if the ray intersects the object and update the intersection data (`ix`) if the intersection is the closest one found so far.
+    
+While the origins of the camera rays are known, the following chapter will explain how to calculate the direction of each camera ray.
+
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
+
+---
+
+## The Camera Ray
+
+Following the camera ray (or primary ray) for a given pixel is the first step in ray tracing. Calculating the camera ray involves several steps, which will be described in the chapters below.
+
+### Perspective Viewing
 
 <p align="center">
-    <img src="https://github.com/Busedame/miniRT/blob/main/.assets/orthographic_perspective_viewing.png" alt="orthographic_perspective_viewing.png" width="500"/>
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/orthographic_perspective_viewing.png" alt="orthographic_perspective_viewing.png" width="500"/>
     <br>
     <span><strong>Top:</strong> In orthogonal viewing, each pixel is a separate camera ray, all running parallel to one another. This results in objects being the same size, regardless of their distance. Used in technical drawings and CAD. <br><strong>Bottom:</strong> Perspective viewing is more in line with how we perceive the world: Camera rays have a single point of origin. This way, objects have a vanishing point and appear smaller the farther they are away. Used in realistic 3D rendering. <br> Sources: Diagrams left <sup><a href="#footnote1">[1]</a></sup>; diagrams right<sup><a href="#footnote2">[2]</a></sup> </span>
 </p>
 
-### The Geometry of Perspective Projection
+---
+
+#### The Geometry of Perspective Projection
 
 A **pinhole camera model** can be used to describe how a 3D scene is projected onto a 2D screen (viewport). The pinhole model has the following properties
 - Rays originate from the camera's position (the "eye") and pass through a virtual screen plane (the viewport).
@@ -1183,20 +965,20 @@ A **pinhole camera model** can be used to describe how a 3D scene is projected o
 - The **view frustum** is a truncated pyramid extending from the camera's position toward the viewport. The rectangular screen at the base of the frustum defines the visible scene.
 
 <p align="center">
-	<img width="600" alt="FOV_frustum" src="https://github.com/Busedame/miniRT/blob/main/.assets/FOV_frustum.png">  
+	<img width="600" alt="FOV_frustum" src="https://github.com/alx-sch/miniRT/blob/main/.assets/FOV_frustum.png">  
 	<br>
 	<span>Pinhole camera model illustrating the FOV frustum and the rectangular screen for 2D projection (viewport).</span>
 </p>
 
 <p align="center">
-	<img width="350" alt="Viewpoint_FOV" src="https://github.com/Busedame/miniRT/blob/main/.assets/Viewport_Field_of_View.png">
+	<img width="350" alt="Viewpoint_FOV" src="https://github.com/alx-sch/miniRT/blob/main/.assets/Viewport_Field_of_View.png">
 	<br>
 	<span>Top: Camera's FOV viewed from above. Bottom: 2D projection onto the screen.</span>
 </p>
 
 ---
 
-### Ray Direction Calculation
+### Field of View
 
 The **Field of View (FOV)** represents how much of the 3D scene is visible to the camera. Depending on the orientation of the camera, the FOV could be horizontal or vertical:
 
@@ -1209,7 +991,7 @@ We employ trigonometric functions, specifically the tangent function, to calcula
 
 ---
 
-### Geometric Relationship Using Tangent
+#### FOV and Tangent Relationship
 
 Imagine a right triangle formed by:
 1. The **camera's position** (the "eye") as the vertex.
@@ -1225,7 +1007,7 @@ $$
 $$
 
 <p align="center">
-	<img width="350" alt="tan_FOV" src="https://github.com/Busedame/miniRT/blob/main/.assets/tan_FOV.png">  
+	<img width="350" alt="tan_FOV" src="https://github.com/alx-sch/miniRT/blob/main/.assets/tan_FOV.png">  
 <p align="center"> </p>
 
 
@@ -1236,9 +1018,9 @@ In C, trigonometric functions expect their input angles to be in radians, not de
 
 ---
 
-### Ray Direction Calculation
+### Computing Camera Ray Directions
 
-The direction of a ray corresponding to a pixel on the viewport is calculated using normalized device coordinates. These calculations map the 2D screen space into 3D world-space rays.
+The direction of a camera ray corresponding to a pixel on the viewport is calculated using normalized device coordinates. These calculations map the 2D screen space into 3D world-space rays.
 
 **Steps to Calculate Ray Direction:**
 
@@ -1277,21 +1059,16 @@ $$
 
 ```C
 /**
-Compute the direction vector of a ray passing through a given pixel in the camera's view.
+Computes the camera ray direction for a given pixel,
+considering the camera's field of view (FOV), aspect ratio, and orientation
 
  @param x	The horizontal pixel coordinate on the screen.
  @param y	The vertical pixel coordinate on the screen.
- @param cam	The camera object containing the FOV in degrees.
+ @param cam	The camera object containing the FOV.
 
- @return	The normalized direction vector of the ray in camera space.
-
- @note
-The z-component of the ray direction is conventionally set to 1.0
-This positions the projection plane (or screen) at z = 1.0 in camera space, simplifying the
-perspective projection calculations. The resulting vector is then normalized to ensure it has
-a unit length, making it independent of the initial choice for the z-component.
+ @return	The normalized direction vector of the ray passing through the pixel, in camera space.
 */
-t_vec3	compute_ray_direction(int x, int y, t_cam cam)
+t_vec3	compute_camera_ray(int x, int y, t_cam cam)
 {
 	double	scale;		// Scaling factor from the vertical FOV
 	double	aspect_ratio;	// Ratio of screen width to height
@@ -1319,7 +1096,7 @@ t_vec3	compute_ray_direction(int x, int y, t_cam cam)
 
 ---
 
-### Handling Camera Orientation
+### Computing Camera Ray Directions in World Space
 
 In a ray-tracing system, the camera's orientation defines how the rays originating from the camera are aligned with the 3D scene. To compute ray directions in world space, you must transform the rays from camera space, where the z-axis points forward, to the orientation defined by the camera's position and rotation in the scene.
 
@@ -1331,38 +1108,37 @@ The camera's orientation in 3D space is defined by three mutually orthogonal vec
 - `cam_up`: Points upward from the camera's perspective (y-axis).
 - `cam_orientation` (provided by .rt file): Points forward along the camera's line of sight (z-axis).
 
-These vectors form a **basis** for the camera's local coordinate system. To transform a direction vector from camera space to world space, you combine these basis vectors weighted by the direction's components in camera space.
+These vectors form a basis for the camera's local coordinate system. To transform a direction vector from camera space to world space, you combine these basis vectors weighted by the direction's components in camera space.
 
 #### Steps for Orientation Transformation
 
 1. Calculate the Ray Direction in Camera Space:    
    The ray direction in camera space is computed from the pixel's normalized coordinates and the field of view, as shown in the earlier function above:
    - $\text{ray-cam-dir} = (x', y', z')$, where:
-      - ($x'$): Scaled and aspect-ratio-adjusted horizontal NDC coordinate.
-      - ($y'$): Scaled vertical NDC coordinate.
+      - ($x'$) and ($y'$) are scaled screen coordinates.
       - ($z'$): Always 1.0, pointing forward in camera space
     
 2. Transform the Ray Direction in Camera Space to World Space:    
    After calculating the ray's direction in camera space, we need to transform this direction into world space, where the entire 3D scene is defined. The formula for this transformation is:
-   - $\text{ray-world-dir} = (x' \times cam-right) + (y' \times cam-up) + (z' \times cam-orientation)$
+   - $\text{ray-world-dir} = (x' \cdot \text{cam-right}) + (y' \cdot \text{cam-up}) + (z' \cdot \text{cam-orientation})$
 
-3. Normalize the Resulting Vector:
+3. Normalize the Resulting Vector:    
    To ensure that the ray direction is a unit vector, normalize the resulting world-space vector.
 
-This full implementation of the `compute_ray_direction` function incorporates the camera orientation:
+This `compute_camera_ray` function fully transforms a ray from camera space to world space:
 
 ```C
 /**
-Function to compute the ray direction for a given pixel in a camera's view,
-considering the camera's field of view (FOV), aspect ratio, and orientation.
+Computes the camera ray direction for a given pixel,
+considering the camera's field of view (FOV), aspect ratio, and orientation
 
- @param x		The horizontal pixel coordinate on the screen.
- @param y		The vertical pixel coordinate on the screen.
- @param cam		The camera object containing the FOV, orientation vector, and position.
+ @param x	The horizontal pixel coordinate on the screen.
+ @param y	The vertical pixel coordinate on the screen.
+ @param cam	The camera object containing the FOV.
 
- @return		The normalized direction vector of the ray passing through the pixel, in world space.
+ @return	The normalized direction vector of the ray passing through the pixel, in camera space.
 */
-static t_vec3	compute_ray_direction(int x, int y, t_cam cam)
+static t_vec3	compute_camera_ray(int x, int y, t_cam cam)
 {
 	double	scale;		// Scaling factor from the vertical FOV
 	double	aspect_ratio;	// Ratio of screen width to height
@@ -1414,15 +1190,261 @@ static t_vec3	compute_ray_direction(int x, int y, t_cam cam)
 }
 ```
 
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
+
+---
+
+## The Shadow Ray
+
+When the camera ray hits an object, we determine that the respective pixel will display that object's color. However, to accurately compute lighting and shading, we need to check whether the point is in shadow. This is done using a **shadow ray**.
+
+A shadow ray is cast from the intersection point towards the light source. If another object blocks the shadow ray before it reaches the light, the point is considered in shadow and is only affected by ambient lighting. Otherwise, the point is directly illuminated by the light source, contributing to diffuse and specular shading. 
+
+### Computing the Shadow Ray
+
+The function `compute_shadow_ray` constructs the shadow ray for a given intersection point and light source. 
+
+```C
+/**
+Computes the shadow ray for a given intersection point and light source.
+Also updates the provided intersection data with the light direction and distance as well as the surface normal.
+
+ @param camera_ray_ix	Pointer to the intersection data of the camera ray.
+ @param light		Light source data.
+
+ @return		Shadow ray structure containing an offset origin, direction, and length.
+*/
+t_shdw	compute_shadow_ray(t_ix *camera_ray_ix, t_light light)
+{
+	t_vec3	hit_point;	// Intersection point where the ray hits the object
+	t_shdw	shadow_ray;	// Structure to store the shadow ray (origin, direction, and length)
+	t_vec3	offset;		// Small offset vector to prevent self-intersection issues
+	t_vec3	normal;		// Surface normal at the intersection poin
+
+	// Get the intersection point
+	hit_point = camera_ray_ix->hit_point;
+
+	// Compute direction towards the light source and store it in intersection data
+	shadow_ray.dir = vec3_norm(vec3_sub(light.position, hit_point));
+	camera_ray_ix->light_dir = shadow_ray.dir;
+
+	// Compute distance from intersection point to light source and store it in intersection data
+	shadow_ray.len = vec3_length(vec3_sub(light.position, hit_point));
+	camera_ray_ix->light_dist = shadow_ray.len;
+
+	// Compute surface normal, flip normal if camera is inside the object, and store in intersetion data
+	normal = compute_normal(camera_ray_ix);
+	if (camera_ray_ix->hit_obj->cam_in_obj)
+		normal = vec3_mult(normal, -1.0);
+	camera_ray_ix->normal = normal;
+
+	// Apply small offset along the normal to avoid self-intersections
+	offset = vec3_mult(normal, 1e-3);
+	shadow_ray.ori = vec3_add(hit_point, offset);
+
+	// Return the shadow ray structure
+	return (shadow_ray);
+}
+```
+
+### Avoiding "Shadow Acne"
+
+If the origin of the shadow ray (the intersection between the camera ray and the object) is not moved slightly above the surface, an effect called "shadow acne" can be observed. Because computers cannot represent floating-point numbers with perfect precision, the hit point falls within a small margin of error around the surface. This means that some calculated hit points end up slightly below the surface. As a result, the shadow ray incorrectly intersects the object itself, causing it to cast a shadow on its own intersection point.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/shadow_0.png" alt="shadow_0.png" width="400"/> <br> (a) <br> 
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/shadow_1.png" alt="shadow_1.png" width="400"/> <br> (b) <br> 
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/shadow_2.png" alt="shadow_2.png" width="400"/> <br> (c) <br> 
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/shadow_3.png" alt="shadow_3.png" width="400"/> <br> (d) <br> 
+    <span>The same scene without any shadowing <strong>(a)</strong>; shadowing without ensuring that the shadow ray-object intersection occurs in front of the light source <strong>(b)</strong>; shadowing without offsetting the shadow ray origin, resulting in shadow acne <strong>(c)</strong>, correct shadowing <strong>(d)</strong>. Note that no shading has been applied yet and shadows are still rendered as black.</span>
+</p>
+
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
+
+---
+
+## Shading
+
+### Phong Reflection Model
+
+As seen in the renders above, adding shadows helps enhance the sense of depth. However, the objects still appear relatively flat, as shadows alone don't fully account for how light interacts with surfaces.   
+
+To improve this, we can use the Phong Reflection Model, which simulates how light interacts with surfaces in three components:   
+
+1. **Ambient Lighting:** This represents the constant light that is scattered throughout the scene, illuminating all objects equally. It's the basic level of lighting that ensures no part of the object remains completely dark. Ambient light doesn’t depend on the object's position or orientation.
+
+2. **Diffuse Shading:** This component simulates the light that hits a matte surface and scatters in many directions. The intensity of the diffuse reflection depends on the angle between the light source and the surface normal. The closer the light is to perpendicular, the brighter the object appears. This is what gives objects their color based on the light they receive (for example, a landscape under the direct noon sun appears bright, while the same landscape at sunset, with a more angled light, appears darker)
+
+3. **Specular Reflection:** This represents the shiny, reflective highlights on smooth surfaces, like the glare from a polished metal or wet surface. Specular reflection is influenced by the angle between the light source, the surface normal, and the viewer’s perspective. The more directly aligned these angles are, the more intense the reflection. This is what creates the glossy or shiny look on objects.
+
+<br>
+
+<p align="center">
+    <img src="https://github.com/alx-sch/42_miniRT/blob/main/.assets/Phong_reflection_model.png" alt="phong_reflection_model.png" width="600"/>
+    <br>
+    <span><strong>Phong Reflection Model</strong>: Ambient Lighting + Diffuse Shading + Specular Reflection = Complete Shading Model.<sup><a href="#footnote3">[3]</a></sup></span>
+</p>
+
+### Diffuse Shading
+
+Lambert's Cosine Law explains how light reflects off rough or matte surfaces. It states that the amount of light reflected is proportional to the cosine of the angle between the surface normal and the light direction. This means that light striking a surface head-on is reflected most strongly, while light at an angle produces weaker reflections. This law is used to simulate how materials appear brighter when facing the light and darker at steeper angles.   
+
+The following function calculates the diffuse reflection coefficient, which is used to simulate how light interacts with matte surfaces.
+
+```C
+/**
+Calculates the diffuse reflection coefficient at an intersection point using Lambert's Cosine Law.
+The diffuse coefficient determines how much light a surface receives based on the angle between the surface normal and the light source direction.
+ 
+@param rt 		Pointer to the main structure.
+@param ix 		Pointer to the intersection data.
+
+@return		The diffuse lighting coefficient value [0.0, 1.0].
+*/
+static double	get_diffuse_coefficient(t_rt *rt, t_ix *ix)
+{
+	double	diffuse;            // Variable to store the diffuse lighting coefficient
+	double	dot;                // Dot product of the surface normal and the light direction
+
+	// Calculate the dot product between the surface normal and the light direction
+	dot = vec3_dot(ix->normal, ix->light_dir);
+	
+	// If the dot product is negative, set it to zero (no diffuse reflection)
+	if (dot < 0)
+		dot = 0;
+	
+	// Apply the diffuse shading formula: dot product * light intensity * diffuse constant
+	// 'K_DIFFUSE' controls the intensity of the diffuse shading [0.0, 1.0].
+	diffuse = dot * rt->scene.light.ratio * K_DIFFUSE;
+
+	return (diffuse);  // Return the diffuse lighting coefficient value [0.0, 1.0]
+}
+```
+
+### Specular Reflection
+
+The following function calculates the specular reflection (or highlight) coefficient based on the Phong shading model. This component simulates the shiny appearance of a surface, contributing to the overall realism by adding reflections of light.
+
+```C
+/**
+Calculates the specular highlighting coefficient at an intersection point based on the Phong shading model.
+The specular coefficient defines the intensity of the specular highlight, which contributes to the shiny appearance of a surface.
+
+ @param rt 		Pointer to the main structure.
+ @param ix 		Pointer to the intersection data.
+
+ @return		The specular lighting coefficient value [0.0, 1.0].
+*/
+static double	get_specular_coefficient(t_rt *rt, t_ix *ix)
+{
+	double	specular;		// Variable to store the specular lighting coefficient
+	double	dot;			// The dot product between the reflection vector and the view direction
+	t_vec3	reflection_dir;		// The reflection direction vector
+	t_vec3	view_dir;	 	// The view direction from the intersection to the camera
+
+	// Calculate the reflection direction using the light direction and the surface normal
+	reflection_dir = get_reflection(ix->light_dir, ix->normal);
+
+  	// Calculate the view direction from the intersection point to the camera
+	view_dir = vec3_sub(rt->scene.cam.pos, ix->hit_point);
+	view_dir = vec3_norm(view_dir);
+
+	// Calculate the dot product between the reflection direction and view direction
+	dot = vec3_dot(reflection_dir, view_dir);
+
+	// If the dot product is negative, set it to zero (no reflection)
+	if (dot < 0)
+		dot = 0;
+
+	// Calculate the specular intensity using the Phong model: (dot^shininess) * light ratio * specular constant
+	// 'K_SHININESS' controls the glossiness of the specular highlight (higher values result in a smaller, more focused highlight);
+	// values between 3.0 and 10.0 are recommended.
+	// 'K_SPECULAR' controls the intensity of the specular highlight [0.0, 1.0].
+	specular = pow(dot, K_SHININESS) * rt->scene.light.ratio * K_SPECULAR;
+
+	return (specular);
+}
+```
+
+### Combining Shading Components
+
+The final shaded color for a pixel is calculated by combining the ambient, diffuse, and specular components for each RGB channel, with the result clamped to a maximum of 255 to prevent overflow. An additional light fading effect further enhances the realism of the render.
+
+```C
+/**
+Computes the shading for a pixel based on the object's color and light
+properties.
+ @param rt	Pointer to the main struct containing scene and light properties.
+ @param ix	Pointer to the ray/pixel intersection data containing object and light information.
+
+ @return	A `t_shade` struct with the computed shading components (ambient, diffuse, specular).
+*/
+t_shade	get_shading(t_rt *rt, t_ix *ix)
+{
+	t_shade	pix;
+
+	// Set base color of the object from the intersection data
+	pix.base = ix->hit_obj->color;
+
+	// Set the light color from the scene light properties
+	pix.light = rt->scene.light.color;
+
+	// Set ambient color of the object (how it interacts with ambient light)
+	pix.ambient = ix->hit_obj->color_in_amb;
+
+	// Compute the diffuse reflection coefficient
+	pix.diff_coeff = get_diffuse_coefficient(rt, ix);
+
+	// Compute specular reflection coefficient
+	pix.spec_coeff = get_specular_coefficient(rt, ix);
+
+	// compute distance-based fade factor
+	pix.fade = clamp(K_FADE * 100 / (ix->light_dist * ix->light_dist), 1.0);
+
+	// Compute the diffuse component for each color channel (RGB)
+	pix.diffuse.r = pix.base.r * pix.light.r / 255 * pix.diff_coeff * pix.fade;
+	pix.diffuse.g = pix.base.g * pix.light.g / 255 * pix.diff_coeff * pix.fade;
+	pix.diffuse.b = pix.base.b * pix.light.b / 255 * pix.diff_coeff * pix.fade;
+
+	// Compute the specular component for each color channel (RGB)
+	pix.specular.r = pix.light.r * pix.spec_coeff * pix.fade;
+	pix.specular.g = pix.light.g * pix.spec_coeff * pix.fade;
+	pix.specular.b = pix.light.b * pix.spec_coeff * pix.fade;
+
+	// Compute the final shaded color by adding ambient, diffuse, and specular components
+	// Clamp each color channel to a maximum of 255 to avoid overflow
+	pix.shaded.r = clamp(pix.ambient.r + pix.diffuse.r + pix.specular.r, 255);
+	pix.shaded.g = clamp(pix.ambient.g + pix.diffuse.g + pix.specular.g, 255);
+	pix.shaded.b = clamp(pix.ambient.b + pix.diffuse.b + pix.specular.b, 255);
+
+	return (pix);
+}
+```
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/diffuse_shading.png" alt="diffuse_shading.png" width="400"/> <br> (a) <br> 
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/spec_no_fading.png" alt="spec_no_fading.png" width="400"/> <br> (b) <br> 
+    <img src="https://raw.githubusercontent.com/alx-sch/42_miniRT/refs/heads/main/.assets/spec_fading.png" alt="spec_fading.png" width="400"/> <br> (c) <br> 
+    <span>The same scene with: ambient light and diffuse shading <strong>(a)</strong>, specular highlighting <strong>(b)</strong>, and light fading <strong>(c)</strong>, resulting in a fully shaded render.</span>
+</p>
+
+<div align="right">
+  <b><a href="#top">↥ back to top</a></b>
+</div>
+   
 ---
 
 ## Acknowledgements
 
-The amazing book *Ray Tracing from the Ground Up* by Kevin Suffern is not only an excellent and exhaustive resource on the subject, but also an easy-to-follow guide to the concepts and mathematics behind ray tracing. Figures taken from this book are quoted accordingly. [¹](#footnote1)
-
-The project badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.
+- The incredible books *Ray Tracing from the Ground Up* by Kevin Suffern<sup><a href="#footnote1">[1]</a></sup> and *The Ray Tracer Challenge* by Jamis Buck<sup><a href="#footnote3">[3]</a></sup> are not only excellent and comprehensive resources on the subject, but also accessible guides to the concepts and mathematics behind ray tracing. Figures taken from these books are referenced accordingly.    
+- The project badge is from [this repository](https://github.com/ayogun/42-project-badges) by Ali Ogun.
 
 ## References
 
-<a name="footnote1">¹</a> Suffern, K. (2007). *Ray Tracing from the Ground Up*. A K Peters.     
-<a name="footnote2">²</a> Datamine Software (2024). *Perspective and Orthogonal Views*: [https://docs.dataminesoftware.com/StudioEM/Latest/VR_Help/Perpective%20and%20Orthogonal%20Modes.htm](https://docs.dataminesoftware.com/StudioEM/Latest/VR_Help/Perpective%20and%20Orthogonal%20Modes.htm)
+<a name="footnote1">[1]</a> Suffern, K. (2007). *Ray Tracing from the Ground Up*. A K Peters. <br>
+<a name="footnote2">[2]</a> Buck, J. (2024). *Perspective and Orthogonal Views*. Available at: <a href="https://docs.dataminesoftware.com/StudioEM/Latest/VR_Help/Perpective%20and%20Orthogonal%20Modes.htm" target="_blank">https://docs.dataminesoftware.com/StudioEM/Latest/VR_Help/Perpective%20and%20Orthogonal%20Modes.htm</a> <br>
+<a name="footnote3">[3]</a> Datamine Software (2019). *The Ray Tracer Challenge*. The Pragmatic Programmers, LLC.

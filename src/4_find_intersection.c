@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:59:09 by aschenk           #+#    #+#             */
-/*   Updated: 2025/02/21 09:14:56 by aschenk          ###   ########.fr       */
+/*   Updated: 2025/03/03 17:03:31 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ scene (object and distance) for a given camera ray.
  @param ray_dir		The normalized direction vector of the ray.
  @param obj			Pointer to the object data.
  @param ix			Pointer to the 'intersection data' struct to update.
-
- @return 			ixr struct containing the closest intersection data.
 */
 void	find_ix(t_vec3 ray_ori, t_vec3 ray_dir, t_rt *rt, t_ix *ix)
 {

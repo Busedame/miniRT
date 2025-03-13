@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:10:11 by aschenk           #+#    #+#             */
-/*   Updated: 2025/02/23 18:37:34 by aschenk          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:06:25 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ properties.
 
  @return	A `t_pix_shade` struct with the computed shading components.
 
- @note		`FADE` is a preprocessor macro (default: `1` -> fading on).
+ @note		`SPECULAR` is a preprocessor macro (used in 'BONUS' (`make bonus`)).    
+ 			`FADE` is a preprocessor macro (used in 'BONUS' (`make bonus`)).
 */
 t_shade	get_shading(t_rt *rt, t_ix *ix)
 {
